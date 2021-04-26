@@ -18,7 +18,8 @@ from prometheus_client.core import REGISTRY
 # pylint: disable=protected-access
 REGISTRY.unregister(PROCESS_COLLECTOR)
 REGISTRY.unregister(PLATFORM_COLLECTOR)
-REGISTRY.unregister(REGISTRY._names_to_collectors["python_gc_objects_collected_total"])
+REGISTRY.unregister(
+    REGISTRY._names_to_collectors["python_gc_objects_collected_total"])
 
 
 # pylint: disable=too-few-public-methods
@@ -26,7 +27,6 @@ class CollectSendBytesTotal:
     """
     Custom collector class for bytes sent to wireguard peer
     """
-
     @staticmethod
     def collect():
         """
@@ -41,8 +41,7 @@ class CollectSendBytesTotal:
         )
         for i in range(5):
             metric_collection.add_metric(
-                ["wg0", str(i), "192.168.0.100/32"], random.random()
-            )
+                ["wg0", str(i), "192.168.0.100/32"], random.random())
         yield metric_collection
 
 
@@ -51,7 +50,6 @@ class CollectRecvBytesTotal:
     """
     Custom collector class for bytes received from wireguard peer
     """
-
     @staticmethod
     def collect():
         """
@@ -66,8 +64,7 @@ class CollectRecvBytesTotal:
         )
         for i in range(5):
             metric_collection.add_metric(
-                ["wg0", str(i), "192.168.0.100/32"], random.random()
-            )
+                ["wg0", str(i), "192.168.0.100/32"], random.random())
         yield metric_collection
 
 
@@ -76,7 +73,6 @@ class CollectLatestHandshakeSeconds:
     """
     Custom collector class for how many seconds ago the last wireguard handshake occured
     """
-
     @staticmethod
     def collect():
         """
@@ -91,8 +87,7 @@ class CollectLatestHandshakeSeconds:
         )
         for i in range(5):
             metric_collection.add_metric(
-                ["wg0", str(i), "192.168.0.100/32"], random.random()
-            )
+                ["wg0", str(i), "192.168.0.100/32"], random.random())
         yield metric_collection
 
 
