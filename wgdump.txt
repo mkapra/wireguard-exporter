@@ -1,6 +1,0 @@
-wg0     +Id+m9b5ciqJE2GgmmhDfjeZzqYTfHQwrJictjnG1VM=    5KGqyxoCVAHLshNB1AjDH1asdGYNMghS7PIMpWlkLPBi=    51194   off
-wg0     60PT8CLCbVWl4Aff/7gND5Z42z/1uddLdpYOQb1ArCw=    (none)  00.00.00.00:35578     00.00.0.100/32        1618763104      1585564 12216644        off
-wg0     JS1J1gvPm1l4rQzWvP0ZalAhrOANm/UHSVW+Lg99PxU=    (none)  (none)  00.00.00.101/32        0       0       0       off
-wg0     G6VO8HwGhyqcAKtga5TSJpXNUzy6AB7RDwJb+ZT2Ljo=    (none)  (none)  00.00.0.102/32        0       0       0       off
-wg0     N2mV5e1j3AyULfF2hms67DBer43EEucltSPfDUVtwD4=    (none)  00.00.00.00:47430      00.00.0.200/32,00.00.00.0/24       1619460598      508968436       1017442524      off
-wg0     jYrfGwnXsADlXpMDFrN9OtNQONCXhthif/1Gxiq4qWU=    (none)  00.00.00.00:49303      00.00.0.103/32        1618763996      12208476        22451372        off
