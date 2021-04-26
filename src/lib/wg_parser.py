@@ -11,7 +11,6 @@ class WGParser:
     """
     Parses output of wg show all dump
     """
-
     @staticmethod
     def parse_output(test=False):
         """
@@ -21,24 +20,35 @@ class WGParser:
         :return: list of dictionaries
         """
 
-        command = ['wg', 'show', 'all', 'dump']
+        command = ["wg", "show", "all", "dump"]
         if test:
-            command = ['cat', 'test/wg_dump_test_out.txt']
+            command = ["cat", "test/wg_dump_test_out.txt"]
 
-        with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT) as child:
+        with subprocess.Popen(command,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT) as child:
 
             lines = child.stdout.readlines()
             # we don't need the first line since it is related to the peer
             # on which the command was run.
             lines.pop(0)
 
-            keys = ['interface', 'public-key', 'preshared-key', 'endpoint', 'allowed-ips',
-                    'latest-handshake', 'transfer-rx', 'transfer-tx', 'persistent-keepalive']
-            ignore_keys = ['persistent-keepalive', 'preshared-key']
+            keys = [
+                "interface",
+                "public-key",
+                "preshared-key",
+                "endpoint",
+                "allowed-ips",
+                "latest-handshake",
+                "transfer-rx",
+                "transfer-tx",
+                "persistent-keepalive",
+            ]
+            ignore_keys = ["persistent-keepalive", "preshared-key"]
             result = []
 
             for line in lines:
-                fields = line.strip().split(b'\t')
+                fields = line.strip().split(b"\t")
                 res = dict()
                 for i, key in enumerate(keys):
                     if key in ignore_keys:
