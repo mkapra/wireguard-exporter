@@ -16,8 +16,7 @@ import lib.wg_parser as wg_parser
 # pylint: disable=protected-access
 REGISTRY.unregister(PROCESS_COLLECTOR)
 REGISTRY.unregister(PLATFORM_COLLECTOR)
-REGISTRY.unregister(
-    REGISTRY._names_to_collectors['python_gc_objects_collected_total'])
+REGISTRY.unregister(REGISTRY._names_to_collectors["python_gc_objects_collected_total"])
 
 
 # pylint: disable=too-few-public-methods
@@ -25,6 +24,7 @@ class CollectSendBytesTotal:
     """
     Custom collector class for bytes sent to wireguard peer
     """
+
     @staticmethod
     def collect():
         """
@@ -32,12 +32,15 @@ class CollectSendBytesTotal:
 
         :return: one metric collection per public_key
         """
-        metric_collection = CounterMetricFamily('wireguard_sent_bytes_total',
-                                                'Bytes sent to the peer',
-                                                labels=['interface', 'public_key', 'allowed_ips'])
+        metric_collection = CounterMetricFamily(
+            "wireguard_sent_bytes_total",
+            "Bytes sent to the peer",
+            labels=["interface", "public_key", "allowed_ips"],
+        )
         for i in range(5):
             metric_collection.add_metric(
-                ['wg0', str(i), '192.168.0.100/32'], random.random())
+                ["wg0", str(i), "192.168.0.100/32"], random.random()
+            )
         yield metric_collection
 
 
@@ -46,6 +49,7 @@ class CollectRecvBytesTotal:
     """
     Custom collector class for bytes received from wireguard peer
     """
+
     @staticmethod
     def collect():
         """
@@ -53,12 +57,15 @@ class CollectRecvBytesTotal:
 
         :return: one metric collection per public_key
         """
-        metric_collection = CounterMetricFamily('wireguard_received_bytes_total',
-                                                'Bytes received from the peer',
-                                                labels=['interface', 'public_key', 'allowed_ips'])
+        metric_collection = CounterMetricFamily(
+            "wireguard_received_bytes_total",
+            "Bytes received from the peer",
+            labels=["interface", "public_key", "allowed_ips"],
+        )
         for i in range(5):
             metric_collection.add_metric(
-                ['wg0', str(i), '192.168.0.100/32'], random.random())
+                ["wg0", str(i), "192.168.0.100/32"], random.random()
+            )
         yield metric_collection
 
 
@@ -67,6 +74,7 @@ class CollectLatestHandshakeSeconds:
     """
     Custom collector class for how many seconds ago the last wireguard handshake occured
     """
+
     @staticmethod
     def collect():
         """
@@ -74,16 +82,19 @@ class CollectLatestHandshakeSeconds:
 
         :return: one metric collection per public_key
         """
-        metric_collection = CounterMetricFamily('wireguard_latest_handshake_seconds',
-                                                'Seconds from the last handshake',
-                                                labels=['interface', 'public_key', 'allowed_ips'])
+        metric_collection = CounterMetricFamily(
+            "wireguard_latest_handshake_seconds",
+            "Seconds from the last handshake",
+            labels=["interface", "public_key", "allowed_ips"],
+        )
         for i in range(5):
             metric_collection.add_metric(
-                ['wg0', str(i), '192.168.0.100/32'], random.random())
+                ["wg0", str(i), "192.168.0.100/32"], random.random()
+            )
         yield metric_collection
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     start_http_server(8000)
     REGISTRY.register(CollectSendBytesTotal())
     REGISTRY.register(CollectRecvBytesTotal())
