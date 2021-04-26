@@ -16,7 +16,8 @@ import lib.wg_parser as wg_parser
 # pylint: disable=protected-access
 REGISTRY.unregister(PROCESS_COLLECTOR)
 REGISTRY.unregister(PLATFORM_COLLECTOR)
-REGISTRY.unregister(REGISTRY._names_to_collectors['python_gc_objects_collected_total'])
+REGISTRY.unregister(
+    REGISTRY._names_to_collectors['python_gc_objects_collected_total'])
 
 
 # pylint: disable=too-few-public-methods
@@ -35,7 +36,8 @@ class CollectSendBytesTotal:
                                                 'Bytes sent to the peer',
                                                 labels=['interface', 'public_key', 'allowed_ips'])
         for i in range(5):
-            metric_collection.add_metric(['wg0', str(i), '192.168.0.100/32'], random.random())
+            metric_collection.add_metric(
+                ['wg0', str(i), '192.168.0.100/32'], random.random())
         yield metric_collection
 
 
@@ -55,7 +57,8 @@ class CollectRecvBytesTotal:
                                                 'Bytes received from the peer',
                                                 labels=['interface', 'public_key', 'allowed_ips'])
         for i in range(5):
-            metric_collection.add_metric(['wg0', str(i), '192.168.0.100/32'], random.random())
+            metric_collection.add_metric(
+                ['wg0', str(i), '192.168.0.100/32'], random.random())
         yield metric_collection
 
 
@@ -72,10 +75,11 @@ class CollectLatestHandshakeSeconds:
         :return: one metric collection per public_key
         """
         metric_collection = CounterMetricFamily('wireguard_latest_handshake_seconds',
-                                'Seconds from the last handshake',
-                                labels=['interface', 'public_key', 'allowed_ips'])
+                                                'Seconds from the last handshake',
+                                                labels=['interface', 'public_key', 'allowed_ips'])
         for i in range(5):
-            metric_collection.add_metric(['wg0', str(i), '192.168.0.100/32'], random.random())
+            metric_collection.add_metric(
+                ['wg0', str(i), '192.168.0.100/32'], random.random())
         yield metric_collection
 
 
