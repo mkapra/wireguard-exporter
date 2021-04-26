@@ -7,11 +7,12 @@ Imports
 import random
 import time
 
-from prometheus_client import (PLATFORM_COLLECTOR, PROCESS_COLLECTOR,
-                               start_http_server)
-from prometheus_client.core import REGISTRY, CounterMetricFamily
-
 import lib.wg_parser as wg_parser
+from prometheus_client import PLATFORM_COLLECTOR
+from prometheus_client import PROCESS_COLLECTOR
+from prometheus_client import start_http_server
+from prometheus_client.core import CounterMetricFamily
+from prometheus_client.core import REGISTRY
 
 # unregister not used metrics
 # pylint: disable=protected-access
