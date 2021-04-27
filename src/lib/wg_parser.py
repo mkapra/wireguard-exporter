@@ -24,21 +24,31 @@ class WGParser:
         """
         command = ['wg', 'show', 'all', 'dump']
         if test:
-            command = ['cat', 'test/wg_dump_test_out.txt']
+            command = ["cat", "test/wg_dump_test_out.txt"]
 
-        with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT) as child:
+        with subprocess.Popen(command,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT) as child:
 
             lines = child.stdout.readlines()
-
-            keys = ['interface', 'public-key', 'preshared-key', 'endpoint', 'allowed-ips',
-                    'latest-handshake', 'transfer-rx', 'transfer-tx', 'persistent-keepalive']
+            keys = [
+                "interface",
+                "public-key",
+                "preshared-key",
+                "endpoint",
+                "allowed-ips",
+                "latest-handshake",
+                "transfer-rx",
+                "transfer-tx",
+                "persistent-keepalive",
+            ]
             device_keys = ['interface', 'private-key', 'public-key', 'listen-port', 'fwmark']
-            ignore_keys = ['persistent-keepalive', 'preshared-key']
+            ignore_keys = ["persistent-keepalive", "preshared-key"]
             result = []
             device_result = []
 
             for line in lines:
-                fields = line.strip().split(b'\t')
+                fields = line.strip().split(b"\t")
                 res = dict()
 
                 if len(fields) == 5:
