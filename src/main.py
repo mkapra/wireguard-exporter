@@ -122,7 +122,8 @@ class CollectPeerInfo:
             labels=['interface', 'public_key', 'allowed_ips']
         )
         for peer_dict in result:
-            local_time = datetime.fromtimestamp(int(peer_dict['latest-handshake']))
+            local_time = datetime.fromtimestamp(
+                int(peer_dict['latest-handshake']))
             if datetime.now() - local_time < timedelta(minutes=10):
                 online_state = 1
             else:

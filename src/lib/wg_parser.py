@@ -42,7 +42,8 @@ class WGParser:
                 "transfer-tx",
                 "persistent-keepalive",
             ]
-            device_keys = ['interface', 'private-key', 'public-key', 'listen-port', 'fwmark']
+            device_keys = ['interface', 'private-key',
+                           'public-key', 'listen-port', 'fwmark']
             ignore_keys = ["persistent-keepalive", "preshared-key"]
             result = []
             device_result = []
