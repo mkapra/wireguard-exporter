@@ -5,11 +5,11 @@ Imports
 """
 import time
 from datetime import datetime, timedelta
-from prometheus_client import PLATFORM_COLLECTOR
-from prometheus_client import PROCESS_COLLECTOR
-from prometheus_client import start_http_server
-from prometheus_client.core import CounterMetricFamily
-from prometheus_client.core import REGISTRY
+
+from prometheus_client import (PLATFORM_COLLECTOR, PROCESS_COLLECTOR,
+                               start_http_server)
+from prometheus_client.core import REGISTRY, CounterMetricFamily
+
 import lib.wg_parser as wg_parser
 
 # unregister not used metrics
