@@ -18,7 +18,8 @@ from prometheus_client.core import REGISTRY
 # pylint: disable=protected-access
 REGISTRY.unregister(PROCESS_COLLECTOR)
 REGISTRY.unregister(PLATFORM_COLLECTOR)
-REGISTRY.unregister(REGISTRY._names_to_collectors["python_gc_objects_collected_total"])
+REGISTRY.unregister(
+    REGISTRY._names_to_collectors["python_gc_objects_collected_total"])
 
 
 # pylint: disable=too-few-public-methods
@@ -26,7 +27,6 @@ class CollectSendBytesTotal:
     """
     Custom collector class for bytes sent to wireguard peer
     """
-
     def __init__(self, wgparser: wg_parser.WGParser):
         self.parser = wgparser
 
@@ -58,7 +58,6 @@ class CollectRecvBytesTotal:
     """
     Custom collector class for bytes received from wireguard peer
     """
-
     def __init__(self, wgparser: wg_parser.WGParser):
         self.parser = wgparser
 
@@ -91,7 +90,6 @@ class CollectLatestHandshakeSeconds:
     """
     Custom collector class for how many seconds ago the last wireguard handshake occured
     """
-
     def __init__(self, wgparser: wg_parser.WGParser):
         self.parser = wgparser
 
@@ -124,7 +122,6 @@ class CollectPeerInfo:
     """
     Custom collector class for how many seconds ago the last wireguard handshake occured
     """
-
     def __init__(self, wgparser: wg_parser.WGParser):
         self.parser = wgparser
 
@@ -141,7 +138,8 @@ class CollectPeerInfo:
             labels=["interface", "public_key", "allowed_ips"],
         )
         for peer_dict in result:
-            local_time = datetime.fromtimestamp(int(peer_dict["latest-handshake"]))
+            local_time = datetime.fromtimestamp(
+                int(peer_dict["latest-handshake"]))
             if datetime.now() - local_time < timedelta(minutes=10):
                 online_state = 1
             else:
@@ -162,7 +160,6 @@ class CollectDeviceInfo:
     """
     Custom collector class for how many seconds ago the last wireguard handshake occured
     """
-
     def __init__(self, wgparser: wg_parser.WGParser):
         self.parser = wgparser
 
@@ -181,8 +178,8 @@ class CollectDeviceInfo:
         for device_dict in device_result:
             print(device_dict)
             metric_collection.add_metric(
-                [device_dict["interface"], device_dict["public-key"]], int(123)
-            )
+                [device_dict["interface"], device_dict["public-key"]],
+                int(123))
         yield metric_collection
 
 

@@ -11,7 +11,6 @@ class WGParser:
     """
     Parses output of wg show all dump
     """
-
     def __init__(self):
         self.parse_result = []
 
@@ -26,9 +25,9 @@ class WGParser:
         if test:
             command = ["cat", "test/wg_dump_test_out.txt"]
 
-        with subprocess.Popen(
-            command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
-        ) as child:
+        with subprocess.Popen(command,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT) as child:
 
             lines = child.stdout.readlines()
             keys = [
