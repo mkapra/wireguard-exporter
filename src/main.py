@@ -16,8 +16,7 @@ import lib.wg_parser as wg_parser
 # pylint: disable=protected-access
 REGISTRY.unregister(PROCESS_COLLECTOR)
 REGISTRY.unregister(PLATFORM_COLLECTOR)
-REGISTRY.unregister(
-    REGISTRY._names_to_collectors["python_gc_objects_collected_total"])
+REGISTRY.unregister(REGISTRY._names_to_collectors["python_gc_objects_collected_total"])
 
 
 # pylint: disable=too-few-public-methods
@@ -41,8 +40,14 @@ class CollectSendBytesTotal:
             labels=["interface", "public_key", "allowed_ips"],
         )
         for peer_dict in result:
-            metric_collection.add_metric([peer_dict['interface'], peer_dict['public-key'],
-                                          peer_dict['allowed-ips']], peer_dict['transfer-tx'])
+            metric_collection.add_metric(
+                [
+                    peer_dict["interface"],
+                    peer_dict["public-key"],
+                    peer_dict["allowed-ips"],
+                ],
+                peer_dict["transfer-tx"],
+            )
         yield metric_collection
 
 
@@ -68,8 +73,14 @@ class CollectRecvBytesTotal:
             labels=["interface", "public_key", "allowed_ips"],
         )
         for peer_dict in result:
-            metric_collection.add_metric([peer_dict['interface'], peer_dict['public-key'],
-                                          peer_dict['allowed-ips']], peer_dict['transfer-rx'])
+            metric_collection.add_metric(
+                [
+                    peer_dict["interface"],
+                    peer_dict["public-key"],
+                    peer_dict["allowed-ips"],
+                ],
+                peer_dict["transfer-rx"],
+            )
         yield metric_collection
 
 
@@ -90,13 +101,19 @@ class CollectLatestHandshakeSeconds:
         """
         result, device_result = self.parser.parse_result
         metric_collection = GaugeMetricFamily(
-            'wireguard_latest_handshake_seconds',
-            'Seconds from the last handshake',
-            labels=['interface', 'public_key', 'allowed_ips']
+            "wireguard_latest_handshake_seconds",
+            "Seconds from the last handshake",
+            labels=["interface", "public_key", "allowed_ips"],
         )
         for peer_dict in result:
-            metric_collection.add_metric([peer_dict['interface'], peer_dict['public-key'],
-                                          peer_dict['allowed-ips']], peer_dict['latest-handshake'])
+            metric_collection.add_metric(
+                [
+                    peer_dict["interface"],
+                    peer_dict["public-key"],
+                    peer_dict["allowed-ips"],
+                ],
+                peer_dict["latest-handshake"],
+            )
         yield metric_collection
 
 
@@ -117,19 +134,24 @@ class CollectPeerInfo:
         """
         result, device_result = self.parser.parse_result
         metric_collection = GaugeMetricFamily(
-            'wireguard_peer_info',
-            'WireGuard Peer Info',
-            labels=['interface', 'public_key', 'allowed_ips']
+            "wireguard_peer_info",
+            "WireGuard Peer Info",
+            labels=["interface", "public_key", "allowed_ips"],
         )
         for peer_dict in result:
-            local_time = datetime.fromtimestamp(
-                int(peer_dict['latest-handshake']))
+            local_time = datetime.fromtimestamp(int(peer_dict["latest-handshake"]))
             if datetime.now() - local_time < timedelta(minutes=10):
                 online_state = 1
             else:
                 online_state = 0
-            metric_collection.add_metric([peer_dict['interface'], peer_dict['public-key'],
-                                          peer_dict['allowed-ips']], int(online_state))
+            metric_collection.add_metric(
+                [
+                    peer_dict["interface"],
+                    peer_dict["public-key"],
+                    peer_dict["allowed-ips"],
+                ],
+                int(online_state),
+            )
         yield metric_collection
 
 
@@ -150,18 +172,19 @@ class CollectDeviceInfo:
         """
         result, device_result = self.parser.parse_result
         metric_collection = GaugeMetricFamily(
-            'wireguard_device_info',
-            'WireGuard device Info',
-            labels=['interface', 'public_key']
+            "wireguard_device_info",
+            "WireGuard device Info",
+            labels=["interface", "public_key"],
         )
         for device_dict in device_result:
             print(device_dict)
-            metric_collection.add_metric([device_dict['interface'],
-                                          device_dict['public-key']], int(123))
+            metric_collection.add_metric(
+                [device_dict["interface"], device_dict["public-key"]], int(123)
+            )
         yield metric_collection
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     parser = wg_parser.WGParser()
     parser.parse_output()

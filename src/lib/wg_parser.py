@@ -22,13 +22,13 @@ class WGParser:
         :param: test: get actual data or get 'fake' data from the file test/out.txt
         :return: list of dictionaries
         """
-        command = ['wg', 'show', 'all', 'dump']
+        command = ["wg", "show", "all", "dump"]
         if test:
             command = ["cat", "test/wg_dump_test_out.txt"]
 
-        with subprocess.Popen(command,
-                              stdout=subprocess.PIPE,
-                              stderr=subprocess.STDOUT) as child:
+        with subprocess.Popen(
+            command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+        ) as child:
 
             lines = child.stdout.readlines()
             keys = [
@@ -42,8 +42,13 @@ class WGParser:
                 "transfer-tx",
                 "persistent-keepalive",
             ]
-            device_keys = ['interface', 'private-key',
-                           'public-key', 'listen-port', 'fwmark']
+            device_keys = [
+                "interface",
+                "private-key",
+                "public-key",
+                "listen-port",
+                "fwmark",
+            ]
             ignore_keys = ["persistent-keepalive", "preshared-key"]
             result = []
             device_result = []
