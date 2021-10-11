@@ -35,6 +35,7 @@ class CollectSendBytesTotal:
 
         :return: one metric collection per public_key
         """
+        result, device_result = self.parser.parse_result
         metric_collection = CounterMetricFamily(
             "wireguard_sent_bytes_total",
             "Bytes sent to the peer",
@@ -89,7 +90,7 @@ class CollectLatestHandshakeSeconds:
         :return: one metric collection per public_key
         """
         result, device_result = self.parser.parse_result
-        metric_collection = GaugeMetricFamily(
+        metric_collection = CounterMetricFamily(
             'wireguard_latest_handshake_seconds',
             'Seconds from the last handshake',
             labels=['interface', 'public_key', 'allowed_ips']
@@ -116,7 +117,7 @@ class CollectPeerInfo:
         :return: one metric collection per public_key
         """
         result, device_result = self.parser.parse_result
-        metric_collection = GaugeMetricFamily(
+        metric_collection = CounterMetricFamily(
             'wireguard_peer_info',
             'WireGuard Peer Info',
             labels=['interface', 'public_key', 'allowed_ips']
@@ -148,7 +149,7 @@ class CollectDeviceInfo:
         :return: one metric collection per public_key
         """
         result, device_result = self.parser.parse_result
-        metric_collection = GaugeMetricFamily(
+        metric_collection = CounterMetricFamily(
             'wireguard_device_info',
             'WireGuard device Info',
             labels=['interface', 'public_key']
@@ -176,4 +177,4 @@ if __name__ == '__main__':
 
     while True:
         time.sleep(1)
-        parser.parse_output(test=True)
+        parser.parse_output()
